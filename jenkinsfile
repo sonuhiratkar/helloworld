@@ -1,0 +1,26 @@
+pipeline {
+     agent any
+
+     stages {
+         stage ('checkout') {
+            steps {
+               // checkout the code from the git repository
+                  git 'https://github.com/sonuhiratkar/hello-world5.git'
+             }
+         }
+
+         stage('Build') {
+             steps {
+                  // clean and install Maven dependencies
+            sh 'mvn clean install '
+             }
+         }
+    }
+
+post {
+   always {
+       // clean up workspace
+       cleanWs()
+       }
+     }
+  }
